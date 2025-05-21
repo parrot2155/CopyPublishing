@@ -1,0 +1,169 @@
+*{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            align-items: center;
+            position:relative;
+        }
+        .main{
+            width: 860px;
+            height: 720px;
+            margin: 0px;
+            padding: 0px;
+            border: 1px solid red;
+        }
+        .header{
+            /* border: 1px solid blue; */
+            height: 7%;
+        }
+        .follower{
+            /* border: 1px solid green; */
+            height: 10%;
+        }
+        .logo{
+            width: 50px;
+            border: 1px solid green;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .nav{
+            border: 1px solid yellow;
+            width: 20%;
+            float: right;
+            height: 100%;
+        }
+        .nav a{
+            margin: 0px;
+            float: right;
+            /* border: 1px solid yellow; */
+            /* background-color: aqua; */
+            width: 33%;
+            height: 100%;
+            font-size: 30px;
+        }
+        .follower{
+            background-color: bisque;
+            height: 10%;
+        }
+        .followerme{
+
+            float: left;
+            margin: 3px;
+            height: 90%;
+            border: 1px solid red;
+            width: 8%;
+            border-radius: 50%;
+        }
+        .follower a{
+            float: left;
+            margin: 3px;
+            height: 90%;
+            /* border: 1px solid blue; */
+            width: 8%;
+            border-radius: 50%;
+            font-size: 40px;
+            
+        }
+        
+
+        .profile{
+            background-color: antiquewhite;
+            width: 50%;
+            height: 12%;
+        }
+        .profile img{
+            float: left;
+            margin: 3px;
+            height: 90%;
+            border: 1px solid blue;
+            width: 20%;
+            border-radius: 50%;
+        }
+        .name{
+            height: 50%;
+            float: left;
+            /* border: 1px solid blue; */
+            width: 100%;
+        }
+        .introduce{
+            float: left;
+            /* background-color:seagreen; */
+            height: 100%;
+            width: 78%;
+        }
+        .calendar{
+            float: left;
+            width: 50%;
+            border: 1px solid rgb(212, 226, 129);
+            background-color: beige;
+            padding: 20px;
+            height:70%;
+        }
+        .today{
+            background-color: orange;
+        }
+        .calFunc{
+            width: 40%;
+            height: 10%;
+            border: 1px solid green;
+            text-align: left;
+            vertical-align: middle;
+        }
+        .button{
+            float: right;
+            /* border: 1px solid blue; */
+           
+
+        }
+        .calFunc input{
+            float: right;
+        }
+        table{
+            text-align: center;
+        }
+        th{
+            width: 50px;
+            height: 50px;
+            border: 1px solid blue;
+        }
+        td{
+            width: 50px;
+            height: 60px;
+            border: 1px solid blue;
+        }
+
+        .category{
+            
+            float: right;
+            height:70%;
+            /* border: 1px solid red; */
+        }
+        .category div{
+            padding-top: 8px;
+            border-radius: 20px;
+            float: left;
+            width:100%;
+            height: 10%;
+            border: 1px solid green;
+        }
+        .category div input{
+            float: right;
+            margin-right: 20px;
+        }
+        .footer{
+            cursor: pointer;
+            position: fixed;
+            bottom: 0;
+            transform: translateX(0%);
+            border: 1px solid red;
+            background-color: antiquewhite;
+            width: 860px;
+        }
+        .footer a{
+            text-align: center;
+            float: left;
+            width: 214px;
+            /* border: 1px solid blue; */
+        }
