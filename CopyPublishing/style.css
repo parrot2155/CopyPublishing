@@ -139,6 +139,7 @@
             float: right;
             height:70%;
             /* border: 1px solid red; */
+            width: 400px;
         }
         .category div{
             padding-top: 8px;
@@ -167,3 +168,16 @@
             width: 214px;
             /* border: 1px solid blue; */
         }
+        td.selected {
+            color: blue;
+            font-weight: bold;
+            font-size: 13pt;
+            background-color: aqua;
+        }
+@font-face {
+    font-family: 'Other Hand'; /*font 이름*/
+    font-style: 'normal'; /* font 스타일 정의 (기울임, 일반) */
+    font-weight: 4000; /* font 굵기 정의 */
+    /* 브라우저&디바이스 환경에 따른 font 파일 위치 정의 */
+    src: url('AppData/Local/Microsoft/Windows/Fonts/OtherHand.otf');
+}
