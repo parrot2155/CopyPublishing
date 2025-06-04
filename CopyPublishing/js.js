@@ -55,18 +55,59 @@ function renderCalendar(date) {
     }
 }
 
-function lastMonth() {
+function lastMonth() {                   //다음달 넘기기기
     currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar(currentDate);
 }
-
-function nextMonth() {
+ 
+function nextMonth() {                   //이전달달 넘기기기
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar(currentDate);
 }
 
+document.addEventListener('DOMContentLoaded', () => {           
+    let menuIcon = document.getElementById('menuIcon');
+    let dropdownMenu = document.getElementById('dropdownMenu'); ///////////드롭다운 메뉴뉴
 
-// -------------------카테고리리
+      
+    menuIcon.addEventListener('click', () => {                   
+        if (dropdownMenu.style.display === 'none') {
+            dropdownMenu.style.display = 'block';
+        } else {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+
+    //닫기
+    document.addEventListener('click', function (event) {
+        if (!menuIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    let mailIcon = document.getElementById('mailIcon');
+    let dropdownMenu = document.getElementById('dropdownmail');
+
+      
+    mailIcon.addEventListener('click', () => {
+        if (dropdownmail.style.display === 'none') {
+            dropdownmail.style.display = 'block';}
+        // } else {
+        //     dropdownmail.style.display = 'none';
+        // }
+    });
+
+    //바깥에 눌러도 닫기
+    document.addEventListener('click', function (event) {
+        if (!mailIcon.contains(event.target) && !dropdownmail.contains(event.target)) {
+            dropdownmail.style.display = 'none';
+        }
+    });
+});
+
+// -------------------카테고리
 
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll('.category input[type="button"]');
@@ -75,8 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', function() {
       const parentDiv = this.parentElement;
+
+      if (parentDiv.nextElementSibling?.classList?.contains('input-area')) return;
+
       const inputdiv = document.createElement('div');
-      
+      inputdiv.className = 'input-area'; // CSS 클래스
 
       const input = document.createElement('input');
       input.type = 'text';
@@ -84,25 +128,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const addBtn = document.createElement('button');
       addBtn.textContent = '추가';
+      
       addBtn.addEventListener('click', () => {
-        const text = input.value.trim();
+                const text = input.value.trim();
+                if (!text) return;
 
-        const todoItem = document.createElement('div');
-        todoItem.textContent = "✅" + text;
+                const todoItem = document.createElement('div');
+                 
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
 
-        inputdiv.parentNode.insertBefore(todoItem, inputdiv.nextSibling);
-        input.value = '';
-      });
+                const span = document.createElement('span');
+                span.textContent = text;
 
-      inputdiv.appendChild(input);
-      inputdiv.appendChild(addBtn);
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = '❌';
+                deleteBtn.style.marginLeft = '10px';
+                deleteBtn.addEventListener('click', () => {
+                    todoItem.remove();
+                });
 
-      parentDiv.parentNode.insertBefore(inputdiv, parentDiv.nextSibling);
+                todoItem.appendChild(checkbox);
+                todoItem.appendChild(span);
+                todoItem.appendChild(deleteBtn);
+
+                inputdiv.parentNode.insertBefore(todoItem, inputdiv.nextSibling);
+                input.value = 'edsd';
+            });
+
+            inputdiv.appendChild(input);
+            inputdiv.appendChild(addBtn);
+
+            parentDiv.parentNode.insertBefore(inputdiv, parentDiv.nextSibling);
     });
   });
 });
-//입력받은 창은 없애는 기능 못넣음
-//할일 카테고리에 체크박스 기능 못넣음
-//삭제하는 기능 못넣음
-//추ㅏ되는 박스에 css를 따로 못넣었음/.....
 
