@@ -93,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
       
     mailIcon.addEventListener('click', () => {
         if (dropdownmail.style.display === 'none') {
-            dropdownmail.style.display = 'block';}
-        // } else {
-        //     dropdownmail.style.display = 'none';
-        // }
+            dropdownmail.style.display = 'block';
+        } else {
+            dropdownmail.style.display = 'none';
+        }
     });
 
     //바깥에 눌러도 닫기
@@ -107,20 +107,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+
+
+
 // -------------------카테고리
 
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll('.category input[type="button"]');
+  
   buttons.forEach(button => {
-
-
     button.addEventListener('click', function() {
       const parentDiv = this.parentElement;
+      const existingInputArea = parentDiv.nextElementSibling;
 
-      if (parentDiv.nextElementSibling?.classList?.contains('input-area')) return;
+      // 이미 input-area가 있으면 제거 (토글 동작)
+      if (existingInputArea?.classList?.contains('input-area')) {
+        existingInputArea.remove();
+        return;
+      }
 
+      // 없으면 생성
       const inputdiv = document.createElement('div');
-      inputdiv.className = 'input-area'; // CSS 클래스
+      inputdiv.className = 'input-area';
 
       const input = document.createElement('input');
       input.type = 'text';
@@ -128,39 +138,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const addBtn = document.createElement('button');
       addBtn.textContent = '추가';
-      
+
       addBtn.addEventListener('click', () => {
-                const text = input.value.trim();
-                if (!text) return;
+        const text = input.value.trim();
+        if (!text) return;
 
-                const todoItem = document.createElement('div');
-                 
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
+        const todoItem = document.createElement('div');
 
-                const span = document.createElement('span');
-                span.textContent = text;
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
 
-                const deleteBtn = document.createElement('button');
-                deleteBtn.textContent = '❌';
-                deleteBtn.style.marginLeft = '10px';
-                deleteBtn.addEventListener('click', () => {
-                    todoItem.remove();
-                });
+        const span = document.createElement('span');
+        span.textContent = text;
 
-                todoItem.appendChild(checkbox);
-                todoItem.appendChild(span);
-                todoItem.appendChild(deleteBtn);
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '❌';
+        deleteBtn.style.marginLeft = '10px';
+        deleteBtn.addEventListener('click', () => {
+          todoItem.remove();
+        });
 
-                inputdiv.parentNode.insertBefore(todoItem, inputdiv.nextSibling);
-                input.value = 'edsd';
-            });
+        todoItem.appendChild(checkbox);
+        todoItem.appendChild(span);
+        todoItem.appendChild(deleteBtn);
 
-            inputdiv.appendChild(input);
-            inputdiv.appendChild(addBtn);
+        inputdiv.parentNode.insertBefore(todoItem, inputdiv.nextSibling);
+        input.value = '';
+      });
 
-            parentDiv.parentNode.insertBefore(inputdiv, parentDiv.nextSibling);
+      inputdiv.appendChild(input);
+      inputdiv.appendChild(addBtn);
+      parentDiv.parentNode.insertBefore(inputdiv, parentDiv.nextSibling);
     });
   });
 });
+document.getElementById("registerCategory").addEventListener("click", function () {
+    // + 버튼 클릭 시 동작하는 함수 직접 호출 또는 버튼 클릭 이벤트 발생
+    document.getElementById("cate1").click();
+});
 
+
+// 카테고리 토글
+//디자인 새로 넣음
+//footer 고정되게 제작
+//드롭박스 날라가는거 해결못함. 그러나 데스크탑에서는 문제없이 보이긴 함.
