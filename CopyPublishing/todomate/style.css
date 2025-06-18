@@ -1,0 +1,321 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.main {
+    width: 860px;
+    height: 1000px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.header {
+    height: 7%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    /* border: 1px solid #4CAF50; */
+    border-radius: 50%;
+    background-color: #a5d6a7;
+}
+
+.nav {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav a {
+    font-size: 1.6rem;
+    color: #555;
+    margin-left: 15px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #4CAF50;
+}
+
+.follower {
+    background-color: bisque;
+    height: 10%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.followerme,
+.follower a {
+    width: 8%;
+    height: 90%;
+    border-radius: 50%;
+    /* border: 1px solid #e57373; */
+    background-color: #ffccbc;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    color: #a63636;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.follower a:hover,
+.followerme:hover {
+    background-color: #ef9a9a;
+}
+
+.profile {
+    background-color: antiquewhite;
+    width: 50%;
+    height: 12%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 12px;
+}
+
+.profile img {
+    width: 20%;
+    height: auto;
+    border-radius: 50%;
+    border: 1px solid #64b5f6;
+    object-fit: cover;
+}
+
+.name {
+    width: 100%;
+}
+
+.introduce {
+    width: 78%;
+}
+
+
+.content {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* 달력 */
+.calendar {
+    flex: 1;
+    max-width: 50%;
+    background-color: beige;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.today {
+    background-color: orange;
+    color: white;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+.calFunc {
+    width: 40%;
+    height: 10%;
+    /* border: 1px solid #4caf50; */
+    text-align: left;
+    vertical-align: middle;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    background-color: #c0ffea;
+}
+
+.calFunc input {
+    float: right;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+}
+
+.button {
+    float: right;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+th, td {
+    width: 50px;
+    height: 60px;
+    border: 1px solid #64b5f6;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+td.selected {
+    color: #2196f3;
+    font-weight: bold;
+    font-size: 13pt;
+    background-color: #81d4fa;
+    border-color: #2196f3;
+}
+
+/* 카테고리 */
+.category {
+    width: 35%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ccc;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+}
+
+.category div {
+    padding-top: 8px;
+    border-radius: 20px;
+    border: 1px solid #4caf50;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #e8f5e9;
+    transition: background-color 0.3s;
+}
+
+.category div:hover {
+    background-color: #c8e6c9;
+}
+
+.category div input {
+    margin-right: 20px;
+}
+
+/* 푸터 */
+.footer {
+    cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    /* border: 1px solid #f44336; */
+    background-color: antiquewhite;
+    width: 860px;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+
+.footer a {
+    text-align: center;
+    flex: 1;
+    color: #f44336;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #d32f2f;
+}
+
+/* 드롭다운 메뉴 */
+#dropdownMenu {
+    width: 200px;
+    height: 180px;
+    font-size: 12pt;
+    background-color: white;
+    border: 1px solid #050505;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    position: relative;
+    margin-top: 200px;
+}
+
+#dropdownMenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(153, 34, 34);
+}
+
+#dropdownMenu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: white;
+}
+
+#dropdownMenu li:hover {
+    background-color: #f2f2f2;
+}
+
+#dropdownmail {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #050505;
+}
+
+
+@media (max-width: 900px) {
+    .main {
+        width: 95%;
+        height: auto;
+    }
+    .content {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .calendar, .category {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* 커스텀 폰트 (경로 맞게 수정 필요) */
+@font-face {
+    font-family: 'Other Hand';
+    font-style: normal;
+    font-weight: 400;
+    src: url('AppData/Local/Microsoft/Windows/Fonts/OtherHand.otf');
+}
+
+
