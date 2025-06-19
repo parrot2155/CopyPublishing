@@ -4,6 +4,9 @@ body, html {
   margin: 0;
   padding: 0;
 }
+.header{
+  border: red solid 1px;
+}
 
 .container {
   display: flex;
