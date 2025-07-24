@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.member" >
+ 
+ 	<resultMap id="memberMap" type="com.member.dto.MemberDto">
+		<id property="id" column="ID"/>
+		<result property="pw" column="PW"/>
+		<result property="name" column="NAME"/>
+		<result property="phone" column="PHONE"/>
+		<result property="enabled" column="ENABLED"/>
+	</resultMap>
+	
+ 	<insert id="signup" parameterType="com.member.dto.MemberDto">
+ 		INSERT INTO COMMUNITYMEMBER VALUES(SEQ_CM.NEXTVAL, #{id}, #{pw}, #{name}, #{phone},'Y')
+ 	</insert>
+ 	
+
+	<select id="selectOne" parameterType="com.member.dto.MemberDto" resultMap="memberMap">
+	  SELECT * FROM COMMUNITYMEMBER WHERE ID = #{id} AND PW=#{pw} AND ENABLED='Y'
+	</select>
+	
+	<update id="deleteUser" parameterType="String">
+    UPDATE COMMUNITYMEMBER SET ENABLED = 'N' WHERE ID = #{id}
+	</update>
+	
+	<insert id="insert" parameterType="com.member.dto.MemberDto">
+        INSERT INTO COMMUNITYMEMBER 
+        VALUES (SEQ_CM.NEXTVAL, #{id}, #{pw}, #{name}, #{phone}, #{enabled})
+    </insert>
+	
+ </mapper>

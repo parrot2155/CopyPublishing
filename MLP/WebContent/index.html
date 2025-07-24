@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>K-Digital Training 로그인</title>
+  <link rel="stylesheet" href="login.css" />
+  <script type="text/javascript">
+	function validate() {
+	    const id = document.forms[0].id.value;
+	    const pw = document.forms[0].pw.value;
+	    if (!id || !pw) {
+	      alert("아이디와 비밀번호를 모두 입력하세요.");
+	      return false;
+	    }
+	    return true;
+	 }
+</script>
+</head>
+
+<body>
+  <div class="login-wrapper">
+    <div class="login-container">
+      <div class="welcome-section">
+        <h1>K-Digital Training</h1>
+        <p>교육입과를 환영합니다.</p>
+      </div>
+
+
+      <div class="login-form-section">
+      	<div class="logo">
+          <h2>MLP</h2>
+          <p>Multicampus<br>Learning Platform</p>
+        </div>
+        <select class="lang-select">
+          <option>한국어</option>
+        </select>
+        <form action="member" method="post" onsubmit="return validate()" class="login-form">
+		  <input type="hidden" name="command" value="login">
+		
+		  <div class="input-group">
+		    <label for="id"></label>
+		    <input type="text" name="id" id="id" placeholder="아이디를 입력해 주세요." required />
+		  </div>
+		  
+		  <div class="input-group">
+		    <label for="pw"></label>
+		    <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해 주세요." required />
+		  </div>
+		  
+		  <div class="input-group">
+		    <input type="submit" class="login-btn" value="로그인">
+		  </div>
+		</form>
+        
+        <div class="bottom-links">
+          <p>K-Digital Training은 처음이신가요?</p>
+          <a href="member?command=insertform">회원가입</a> |
+          <a href="#">로그인 안내</a> |
+          <a href="#">오류조치 안내</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <footer class="login-footer">
+    고객센터 <strong>1544-9001</strong> | 운영시간: 평일 8시~20시 (점심 12시~13시)<br />
+    <a href="#">이용약관</a> | <a href="#">개인정보 처리방침</a> &copy; Multicampus Co., Ltd.
+  </footer>
+</body>
+</html>

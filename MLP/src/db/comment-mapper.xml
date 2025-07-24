@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+
+    <resultMap id="commentMap" type="com.comment.dto.CommentDto">
+        <id property="commentId" column="COMMENT_ID"/>
+        <result property="feedId" column="FEED_ID"/>
+        <result property="commenter" column="COMMENTER"/>
+        <result property="content" column="CONTENT"/>
+        <result property="regdate" column="REGDATE"/>
+    </resultMap>
+
+    <!-- 댓글 등록 -->
+    <insert id="insertComment" parameterType="com.comment.dto.CommentDto">
+        INSERT INTO BOARD_COMMENT
+        VALUES (SEQ_COMMENT.NEXTVAL, #{feedId}, #{commenter}, #{content}, SYSDATE)
+    </insert>
+
+    <!-- 특정 게시글의 댓글 목록 -->
+    <select id="selectComments" parameterType="int" resultMap="commentMap">
+        SELECT * FROM BOARD_COMMENT
+        WHERE FEED_ID = #{feedId}
+        ORDER BY COMMENT_ID DESC
+    </select>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment" parameterType="int">
+        DELETE FROM BOARD_COMMENT
+        WHERE COMMENT_ID = #{commentId}
+    </delete>
+
+    <!-- 댓글 수정 -->
+    <update id="updateComment" parameterType="com.comment.dto.CommentDto">
+        UPDATE BOARD_COMMENT
+        SET CONTENT = #{content}
+        WHERE COMMENT_ID = #{commentId}
+    </update>
+
+    <!-- 댓글 하나 조회 -->
+    <select id="selectCommentById" parameterType="int" resultMap="commentMap">
+        SELECT * FROM BOARD_COMMENT
+        WHERE COMMENT_ID = #{commentId}
+    </select>
+
+</mapper>

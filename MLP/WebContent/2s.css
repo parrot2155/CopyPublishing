@@ -1,0 +1,377 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid #ccc;
+	z-index: 1000;
+}
+
+.inner {
+	max-width: 1200px; /* 본문과 동일한 최대 너비 */
+	margin: 0 auto;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 20px; /* 좌우 여백 */
+	box-sizing: border-box;
+}
+/* 상단 줄: 로고 + 검색 */
+.headFline {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+}
+
+.logo img {
+	height: 24px;
+}
+
+.search {
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+}
+
+.searchBox {
+	width: 300px;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	background-color: #e2e0e0;
+}
+
+/* 하단 줄: 메뉴 + 아이콘 */
+.headSline {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 20px;
+	background-color: #f9f9f9;
+	border-top: 1px solid #eee;
+}
+
+.top-menu ul {
+	list-style: none;
+	display: flex;
+	gap: 24px;
+	margin: 0;
+	padding: 0;
+}
+
+.top-menu ul li a {
+	text-decoration: none;
+	color: #333;
+	font-weight: 500;
+}
+
+.top-icons {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}
+
+.write-feed {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}
+
+/* 본문 */
+.container {
+	display: flex;
+	margin-top: 100px; /* header 높이만큼 아래로 밀기 */
+	height: calc(100% - 100px);
+	margin: 100px auto 0 auto; /* 상단은 헤더 높이만큼, 좌우 중앙 정렬 */
+	max-width: 1200px; /* 원하는 너비로 설정 (예: 960px ~ 1440px) */
+	padding: 0 20px; /* 좌우 여백 */
+	box-sizing: border-box;
+}
+
+/* 왼쪽 */
+.left {
+	background: #f9f9f9;
+	width: 50%;
+	padding: 20px;
+	overflow-y: auto;
+	box-sizing: border-box;
+}
+
+.profile-box {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	background-color: #ffffff;
+	padding: 16px;
+	border-radius: 10px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+}
+
+.profile-img {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid #ddd;
+}
+
+.profile-info {
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	color: #333;
+}
+
+.profile-info strong {
+	font-size: 16px;
+	margin-bottom: 4px;
+}
+
+.profile-edit {
+	margin-top: 8px;
+	padding: 6px 12px;
+	font-size: 13px;
+	background-color: #eaeaea;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.profile-edit:hover {
+	background-color: #d5d5d5;
+}
+
+.side-menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.side-menu li {
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+	cursor: pointer;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px; /* 입력칸 사이 간격 */
+}
+
+.input-group input {
+	width: 100%;
+	padding: 10px;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+
+/* 오른쪽 */
+.right {
+	width: 50%;
+	padding: 20px;
+	overflow-y: auto;
+	box-sizing: border-box;
+	/*border-left: 1px solid #ccc; */
+	background: #f9f9f9;
+}
+
+.feed {
+	/*border: red 1px dotted;*/
+	background-color: #ffffff;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	padding: 10px;
+	display: block; /* 기본 표시 */
+	transition: opacity 0.3s ease; /* 부드러운 표시/숨김 전환 */
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feed[style*="display: none"] {
+	opacity: 0; /* 숨겨진 피드 페이드아웃 */
+}
+
+.feed[style*="display: block"] {
+	opacity: 1; /* 표시된 피드 페이드인 */
+}
+
+.feedsearchBox {
+	width: 200px;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	/*background-color: #e2e0e0;*/
+}
+
+.sort-order-select {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.clear-search-btn {
+	margin-left: 10px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.floating-buttons {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 9999; /* 화면 위에 항상 떠 있게 */
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.floating-buttons button {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: none;
+	background-color: white;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	padding: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 하단 버튼 */
+.floating-buttons button img {
+	width: 24px;
+	height: 24px;
+}
+
+.top-btn {
+	font-size: 12px;
+	line-height: 2;
+	text-align: center;
+	color: #888;
+}
+
+/*  작성 폼 */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.feed-form-modal {
+	background-color: white;
+	width: 600px;
+	padding: 24px;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 폼 입력 필드 */
+.feed-input-title, .feed-input-keywords, .feed-content-textarea {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 12px;
+	font-size: 15px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-sizing: border-box;
+}
+
+.feed-content-textarea {
+	height: 160px;
+	resize: vertical;
+}
+
+/* 버튼 */
+.btn-submit {
+	background-color: #007bff;
+	color: white;
+	padding: 10px 18px;
+	border: none;
+	border-radius: 6px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.btn-cancel {
+	background-color: #ccc;
+	padding: 10px 18px;
+	border: none;
+	border-radius: 6px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+/*---------------------------*/
+
+
+.comment-section {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+}
+.comment {
+    padding: 4px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+.comment:last-child {
+    border-bottom: none;
+}
+.comment-date {
+    color: #888;
+    font-size: 12px;
+    margin-left: 6px;
+}
+.comment-form {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.comment-input {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.comment-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+    background-color: #4A6CF7;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.comment-btn:hover {
+    background-color: #3d5ee1;
+}
