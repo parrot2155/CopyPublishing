@@ -8,6 +8,7 @@ public class CommentDto {
     private String commenter;
     private String content;
     private Date regdate;
+    private Integer parentId; // ★ 대댓글(부모 댓글 ID)용 추가
 
     // getters and setters
     public int getCommentId() {
@@ -48,5 +49,13 @@ public class CommentDto {
 
     public void setRegdate(Date regdate) {
         this.regdate = regdate;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 }

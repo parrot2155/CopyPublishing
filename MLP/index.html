@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+      <meta charset="UTF-8">
+      <title>K-Digital Training</title>
+      <link rel="shortcut icon" type="image/x-icon" href="./src/logo.ico">
+      <link rel="stylesheet" href="./2s.css">
+      <script type="text/javascript" src="./MLP.js"></script>
+  </head>
+
+
+
+  <body>
+    <header class="header">
+      <!-- 상단 줄 -->
+      <div class="headFline">
+        <div class="logo">
+          <a href="./index.html"><img src="./logo_mlp.png" alt="MLP 로고"></a>
+        </div>
+        <div class="search">
+          <input type="text" placeholder="관심있는 주제, 키워드로 검색해보세요.                  🔍" class="searchBox">
+        </div>
+        <div class="top-icons">
+          <img src="./src/addfeed.png" alt="피드작성" class="write-feed">
+          <img src="./src/notice.png" alt="알림" class="icon">
+          <img src="./src/id.png" alt="프로필" class="icon profile">
+        </div>
+      </div>
+
+      <!-- 하단 줄 -->
+      <div class="headSline">
+        <nav class="top-menu">
+          <ul>
+            <li><a href="">카테고리</a></li>
+            <li><a href="./index.html">피드</a></li>
+            <li><a href="./discoverWidget.html">지식콘텐츠</a></li>
+            <li><a href="./campusConnect.html">캠퍼스</a></li>
+            <li><a href="#">나의학습</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+
+
+
+    <div class="container">
+      <!-- 작성 폼 -->
+      <div id="modalOverlay" class="modal-overlay" style="display: none;">
+        <div id="feedForm" class="feed-form-modal">
+          <textarea id="feedContent" placeholder="내용을 입력하세요."></textarea>
+          <button id="submitFeed">작성</button>
+        </div>
+      </div>
+
+
+
+        <!-- 왼쪽 영역 -->
+      <div class="left">
+        <h2>사이드바</h2> 
+        <ul>
+          <li>공지사항</li>
+            <li>과제</li>
+            <li>자료실</li>
+            <li>Q&A</li>
+          </ul>
+      </div>
+
+          <!-- 오른쪽 영역 -->
+      <div class="right">
+        <h2>전체 피드</h2>
+        <div class="feedsearch">
+          <!-- 나중에 피드검색 넣을 부분 -->
+        </div>
+        <div class="feed">
+          <h3>[공지] 시험 안내</h3>
+          <p>시험 일정이 공지되었습니다.</p>
+        </div>
+        <div class="feed">
+          <h3>[특강] UI/UX</h3>
+          <p>6월 16일 특강이 있습니다.</p>
+        </div>
+        <div class="feed">
+          <h3>[특강] </h3>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/6J9ixwhDYSM?si=P0wQvZqqT9ZHEv6x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="feed">
+          <h3>[특강] UI/UX</h3>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/GmZLS0rXY74?si=6_Ow6zeGqPT5aCaf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="feed">
+          <h3>[특강] UI/UX</h3>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVS2UVaaYYfltKQV766WRv0H2YkCwmni47Qg&s">
+        </div>
+        
+      </div>
+    </div>
+    <div class="floating-buttons">
+      <button class="bookmark-btn" title="북마크">
+        <img src="./src/bookmark.png" alt="북마크">
+      </button>
+      <button class="top-btn" title="상단 이동" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        ↑<br>TOP
+      </button>
+    </div>
+  </body>
+</html>

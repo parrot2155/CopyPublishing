@@ -157,24 +157,48 @@ response.setContentType("text/html; charset=UTF-8");
 					</p>
 					<p>${feed.content}</p>
 
-
+					<!-- 댓글 및 대댓글 출력 -->
 					<div class="comment-section">
 						<c:forEach var="comment" items="${commentMap[feed.no]}">
 							<div class="comment">
 								<strong>${comment.commenter}</strong>: ${comment.content} <span
 									class="comment-date">(${comment.regdate})</span>
+								<!-- 대댓글(답글) 버튼 -->
+								<button type="button" class="reply-btn"
+									onclick="toggleReplyForm('${comment.commentId}')">답글</button>
+
+								<!-- 대댓글 입력 폼 (숨김) -->
+								<form action="board" method="post" class="reply-form"
+									id="replyForm${comment.commentId}"
+									style="display: none; margin-left: 32px;">
+									<input type="hidden" name="command"
+										value="comment_reply_insert"> <input type="hidden"
+										name="feedId" value="${feed.no}"> <input type="hidden"
+										name="parentId" value="${comment.commentId}"> <input
+										type="text" name="content" class="comment-input"
+										placeholder="대댓글을 입력하세요">
+									<button type="submit" class="comment-btn">답글 등록</button>
+								</form>
+
+								<!-- 대댓글 목록 출력 -->
+								<c:forEach var="reply" items="${replyMap[comment.commentId]}">
+									<div class="comment reply" style="margin-left: 32px;">
+										<strong>${reply.commenter}</strong>: ${reply.content} <span
+											class="comment-date">(${reply.regdate})</span>
+									</div>
+								</c:forEach>
 							</div>
 						</c:forEach>
 					</div>
 
-
+					<!-- 댓글 등록 폼 -->
 					<form action="board" method="post" class="comment-form">
 						<input type="hidden" name="command" value="comment_insert">
 						<input type="hidden" name="feedId" value="${feed.no}"> <input
 							type="text" name="content" class="comment-input"
 							placeholder="댓글을 입력하세요">
 						<button type="submit" class="comment-btn">댓글 등록</button>
-					</form>-
+					</form>
 				</div>
 			</c:forEach>
 		</div>
@@ -187,5 +211,15 @@ response.setContentType("text/html; charset=UTF-8");
 			↑<br>TOP
 		</button>
 	</div>
+	<script>
+		window.toggleReplyForm = function(commentId) {
+			//alert("폼 토글: replyForm" + commentId);
+			var form = document.getElementById('replyForm' + commentId);
+			if (form) {
+				form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block'
+						: 'none';
+			}
+		}
+	</script>
 </body>
 </html>

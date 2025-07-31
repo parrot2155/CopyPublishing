@@ -41,11 +41,20 @@ public class BoardController extends HttpServlet {
             String search = request.getParameter("search") != null ? request.getParameter("search").trim() : "";
 
             List<BoardDto> list = bdao.selectAll(sort, search);
-            Map<Integer, List<CommentDto>> commentMap = new HashMap<>();
+
+            // 댓글/대댓글 구조 준비
+            Map<Integer, List<CommentDto>> commentMap = new HashMap<>(); // feed별 최상위댓글
+            Map<Integer, List<CommentDto>> replyMap = new HashMap<>();   // 댓글별 대댓글
 
             for (BoardDto dto : list) {
-                List<CommentDto> comments = cdao.selectComments(dto.getNo());
+                // 1. 해당 피드의 최상위 댓글만 (parentId == null)
+                List<CommentDto> comments = cdao.selectCommentsByParent(dto.getNo(), null);
                 commentMap.put(dto.getNo(), comments);
+                // 2. 각 댓글의 대댓글 (parentId = commentId)
+                for (CommentDto c : comments) {
+                    List<CommentDto> replies = cdao.selectCommentsByParent(dto.getNo(), c.getCommentId());
+                    replyMap.put(c.getCommentId(), replies);
+                }
             }
 
             MemberDto loginUser = (MemberDto) request.getSession().getAttribute("loginUser");
@@ -54,6 +63,7 @@ public class BoardController extends HttpServlet {
             request.setAttribute("name", name);
             request.setAttribute("list", list);
             request.setAttribute("commentMap", commentMap);
+            request.setAttribute("replyMap", replyMap);
             request.setAttribute("sort", sort);
             request.setAttribute("search", search);
 
@@ -96,10 +106,18 @@ public class BoardController extends HttpServlet {
         else if (command.equals("detail")) {
             int no = Integer.parseInt(request.getParameter("seq"));
             BoardDto dto = bdao.selectOne(no);
-            List<CommentDto> comments = cdao.selectComments(no);
+
+            // detail에서도 트리형 댓글 구조로 출력하려면 아래 참고
+            List<CommentDto> comments = cdao.selectCommentsByParent(no, null);
+            Map<Integer, List<CommentDto>> replyMap = new HashMap<>();
+            for (CommentDto c : comments) {
+                List<CommentDto> replies = cdao.selectCommentsByParent(no, c.getCommentId());
+                replyMap.put(c.getCommentId(), replies);
+            }
 
             request.setAttribute("dto", dto);
-            request.setAttribute("comments", comments);
+            request.setAttribute("commentMap", comments);
+            request.setAttribute("replyMap", replyMap);
             RequestDispatcher dis = request.getRequestDispatcher("detail.jsp");
             dis.forward(request, response);
         }
@@ -136,6 +154,7 @@ public class BoardController extends HttpServlet {
             response.sendRedirect("board?command=list");
         }
 
+        // ----------------- 댓글 등록 (최상위) -----------------
         else if (command.equals("comment_insert")) {
             int feedId = Integer.parseInt(request.getParameter("feedId"));
             String content = request.getParameter("content");
@@ -145,17 +164,37 @@ public class BoardController extends HttpServlet {
 
             CommentDto cdto = new CommentDto();
             cdto.setFeedId(feedId);
+            cdto.setParentId(null); // 최상위
             cdto.setCommenter(commenter);
             cdto.setContent(content);
             cdao.insertComment(cdto);
-            response.sendRedirect("board?command=detail&seq=" + feedId);
+            response.sendRedirect("board?command=list");
+        }
+
+        // ----------------- 대댓글 등록 -----------------
+        else if (command.equals("comment_reply_insert")) {
+            int feedId = Integer.parseInt(request.getParameter("feedId"));
+            int parentId = Integer.parseInt(request.getParameter("parentId")); // 부모댓글 ID
+            String content = request.getParameter("content");
+            HttpSession session = request.getSession();
+            MemberDto loginUser = (MemberDto) session.getAttribute("loginUser");
+            String commenter = loginUser != null ? loginUser.getName() : "Guest";
+
+            CommentDto cdto = new CommentDto();
+            cdto.setFeedId(feedId);
+            cdto.setParentId(parentId); // 대댓글의 parentId 필수
+            cdto.setCommenter(commenter);
+            cdto.setContent(content);
+
+            cdao.insertComment(cdto);
+            response.sendRedirect("board?command=list");
         }
 
         else if (command.equals("comment_delete")) {
             int commentId = Integer.parseInt(request.getParameter("commentId"));
             int feedId = Integer.parseInt(request.getParameter("feedId"));
             cdao.deleteComment(commentId);
-            response.sendRedirect("board?command=detail&seq=" + feedId);
+            response.sendRedirect("board?command=list");
         }
 
         else if (command.equals("comment_updateform")) {

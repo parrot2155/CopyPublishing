@@ -4,21 +4,25 @@
 
 <mapper namespace="comment">
 
+    <!-- 댓글/대댓글 매핑 -->
     <resultMap id="commentMap" type="com.comment.dto.CommentDto">
-        <id property="commentId" column="COMMENT_ID"/>
-        <result property="feedId" column="FEED_ID"/>
-        <result property="commenter" column="COMMENTER"/>
-        <result property="content" column="CONTENT"/>
-        <result property="regdate" column="REGDATE"/>
+        <id property="commentId" column="COMMENT_ID" />
+        <result property="feedId" column="FEED_ID" />
+        <result property="commenter" column="COMMENTER" />
+        <result property="content" column="CONTENT" />
+        <result property="regdate" column="REGDATE" />
+        <result property="parentId" column="PARENT_ID" />
     </resultMap>
 
-    <!-- 댓글 등록 -->
+    <!-- 댓글/대댓글 등록 -->
     <insert id="insertComment" parameterType="com.comment.dto.CommentDto">
         INSERT INTO BOARD_COMMENT
-        VALUES (SEQ_COMMENT.NEXTVAL, #{feedId}, #{commenter}, #{content}, SYSDATE)
+        (COMMENT_ID, FEED_ID, COMMENTER, CONTENT, REGDATE, PARENT_ID)
+        VALUES
+        (SEQ_COMMENT.NEXTVAL, #{feedId}, #{commenter}, #{content}, SYSDATE, #{parentId, jdbcType=NUMERIC})
     </insert>
 
-    <!-- 특정 게시글의 댓글 목록 -->
+    <!-- 특정 게시글의 모든 댓글(최상위/대댓글 다 포함) -->
     <select id="selectComments" parameterType="int" resultMap="commentMap">
         SELECT * FROM BOARD_COMMENT
         WHERE FEED_ID = #{feedId}
@@ -27,8 +31,7 @@
 
     <!-- 댓글 삭제 -->
     <delete id="deleteComment" parameterType="int">
-        DELETE FROM BOARD_COMMENT
-        WHERE COMMENT_ID = #{commentId}
+        DELETE FROM BOARD_COMMENT WHERE COMMENT_ID = #{commentId}
     </delete>
 
     <!-- 댓글 수정 -->
@@ -42,6 +45,19 @@
     <select id="selectCommentById" parameterType="int" resultMap="commentMap">
         SELECT * FROM BOARD_COMMENT
         WHERE COMMENT_ID = #{commentId}
+    </select>
+
+    <!-- 대댓글, 계층형 조회 -->
+    <select id="selectCommentsByParent" parameterType="map" resultMap="commentMap">
+        SELECT * FROM BOARD_COMMENT
+        WHERE FEED_ID = #{feedId}
+        <if test="parentId == null">
+            AND PARENT_ID IS NULL
+        </if>
+        <if test="parentId != null">
+            AND PARENT_ID = #{parentId}
+        </if>
+        ORDER BY REGDATE ASC
     </select>
 
 </mapper>
